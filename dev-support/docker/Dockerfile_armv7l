@@ -44,6 +44,8 @@ ENV DEBCONF_TERSE true
 RUN apt-get -q update \
     && apt-get -q install -y --no-install-recommends \
         apt-utils \
+        autoconf \
+        automake \
         build-essential \
         bzip2 \
         clang \
@@ -68,6 +70,7 @@ RUN apt-get -q update \
         make \
         pinentry-curses \
         pkg-config \
+        protobuf-compiler \
         python \
         python2.7 \
         python-pip \
@@ -122,13 +125,12 @@ RUN mkdir -p /opt/protobuf-src \
       -o /opt/protobuf.tar.gz \
     && tar xzf /opt/protobuf.tar.gz --strip-components 1 -C /opt/protobuf-src \
     && cd /opt/protobuf-src \
-    && ./configure \
+    && ./configure --prefix=/opt/protobuf \
     && make install \
     && cd /root \
     && rm -rf /opt/protobuf-src
-ENV PROTOBUF_HOME /usr/local
-## ENV PROTOBUF_HOME /opt/protobuf
-## ENV PATH "${PATH}:/opt/protobuf/bin"
+ENV PROTOBUF_HOME /opt/protobuf
+ENV PATH "${PATH}:/opt/protobuf/bin"
 
 ######
 # Install Apache Maven 3.3.9 (3.3.9 ships with Xenial)
