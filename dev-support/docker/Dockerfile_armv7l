@@ -122,12 +122,13 @@ RUN mkdir -p /opt/protobuf-src \
       -o /opt/protobuf.tar.gz \
     && tar xzf /opt/protobuf.tar.gz --strip-components 1 -C /opt/protobuf-src \
     && cd /opt/protobuf-src \
-    && ./configure --prefix=/opt/protobuf \
+    && ./configure \
     && make install \
     && cd /root \
     && rm -rf /opt/protobuf-src
-ENV PROTOBUF_HOME /opt/protobuf
-ENV PATH "${PATH}:/opt/protobuf/bin"
+ENV PROTOBUF_HOME /usr/local
+## ENV PROTOBUF_HOME /opt/protobuf
+## ENV PATH "${PATH}:/opt/protobuf/bin"
 
 ######
 # Install Apache Maven 3.3.9 (3.3.9 ships with Xenial)
