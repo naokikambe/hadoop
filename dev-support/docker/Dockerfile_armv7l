@@ -99,6 +99,7 @@ RUN apt-get -q update \
 
 ######
 # Install cmake 3.1.0 (3.5.1 ships with Xenial)
+# There is no cmake binary available for armv7l. Build from source.
 ######
 RUN mkdir -p /opt/cmake/src \
     && curl -L -s -S \
